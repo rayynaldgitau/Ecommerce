@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Django App</title>
     {% load static %}
+    {% load crispy_forms_tags %}
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/styles.css' %}">
 
@@ -26,20 +27,30 @@
                     <a class="nav-link" href="{% url 'home-page' %}">HOME</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#">ABOUT</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">CONTACT US</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add-product-page' %}">ADD PRODUCT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'all-products' %}">PRODUCTS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user-registration' %}">REGISTER</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">LOGIN</a>
-                </li>
+                {% if user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add-product-page' %}">ADD PRODUCT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'all-products' %}">PRODUCTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user-logout' %}">LOGOUT</a>
+                        </li>
+                {% else %}
+                        <li>
+                            <a class="nav-link" href="{% url 'user-registration' %}">REGISTER</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user-login' %}">LOGIN</a>
+                        </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
